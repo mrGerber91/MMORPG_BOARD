@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Отклики</h1>
+  <form id="response-filter-form" method="get" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+  </form>
+  <ul>
+    {% for response in responses %}
+      <li>
+        <strong>Объявление:</strong> {{ response.advertisement }}
+        <br>
+        <strong>Текст отклика:</strong> {{ response.text }}
+        <form method="post" action="{% url 'response_delete' response.id %}">
+          {% csrf_token %}
+          <button type="submit">Удалить</button>
+        </form>
+        {% if not response.accepted %}
+          <form method="post" action="{% url 'response_accept' response.id %}">
+            {% csrf_token %}
+            <button type="submit">Принять</button>
+          </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('response-filter-form');
+        var inputs = form.querySelectorAll('input, select');
+
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener('change', function() {
+                form.submit();
+            });
+        }
+    });
+</script>
+
+    
+{% endblock %}

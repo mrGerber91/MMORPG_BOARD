@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form id="uploadForm" action="{% url 'ckeditor5_upload' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="upload" id="upload">
+        <button type="submit">Upload</button>
+    </form>
+{% endblock content %}

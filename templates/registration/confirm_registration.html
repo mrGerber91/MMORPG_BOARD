@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Подтверждение регистрации{% endblock %}
+
+{% block content %}
+    <h2>Подтверждение регистрации</h2>
+    <p>Введите код подтверждения, который мы отправили вам по электронной почте:</p>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.errors }}
+        {{ form.as_p }}
+        <button type="submit">Подтвердить регистрацию</button>
+    </form>
+{% endblock %}

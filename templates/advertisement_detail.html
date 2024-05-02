@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ advertisement.title }}</h1>
+    <p>{{ advertisement.text | safe }}</p>
+    <p>Category: {{ advertisement.category }}</p>
+    <p>Created by: {% if advertisement.created_by %}{{ advertisement.created_by.username }} ({{ advertisement.created_at }}){% else %}Unknown{% endif %}</p>
+    {% if advertisement.last_modified_by %}
+        <p>Last modified by: {{ advertisement.last_modified_by.username }} ({{ advertisement.last_modified_at }})</p>
+    {% endif %}
+    
+{% if user.is_authenticated and user == advertisement.created_by or user.is_superuser %}
+    <a href="{% url 'edit_advertisement' pk=advertisement.pk %}">Edit</a>
+{% endif %}
+    
+{% if user.is_authenticated and user != advertisement.created_by %}
+        <a href="{% url 'add_response' advertisement_pk=advertisement.pk %}">Добавить отклик</a>
+    {% endif %}
+{% endblock %}
+

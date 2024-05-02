@@ -1,0 +1,37 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMORPG </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Главная</a></li>
+                    <li><a href="{% url 'advertisement_list' %}">Объявления</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}">Личный кабинет</a></li>
+                        <li><a href="{% url 'create_advertisement' %}">Создать объявление</a></li>
+                        <li><a href="{% url 'logout' %}">Выйти</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Войти</a></li>
+                        <li><a href="{% url 'register' %}">Регистрация</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <footer class="footer">
+            <p>© 2024 Сайт создал <a href="https://github.com/mrGerber91" target="_blank">mrGerber91</a></p>
+        </footer>
+    </div>
+</body>
+</html>

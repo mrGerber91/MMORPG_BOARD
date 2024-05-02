@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Новое объявление!{% endblock %}
+
+{% block content %}
+    <p>Здравствуйте!</p>
+    <p>На нашем сайте появилось новое объявление:</p>
+    <h2>{{ advertisement.title }}</h2>
+    <p>{{ advertisement.text | escape }}</p>
+    <p>Чтобы посмотреть объявление, перейдите по <a href="{{ advertisement.get_absolute_url }}">ссылке</a>.</p>
+    <p>С уважением,<br>Ваша команда сайта</p>
+{% endblock %}

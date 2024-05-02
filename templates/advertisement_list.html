@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Объявления</h1>
+    <ul>
+        {% for advertisement in advertisements %}
+        <li>
+            <a href="{% url 'advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
